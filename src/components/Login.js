@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 
 const Login = () => {
+  const [isSignedIn, setIsSignedIn] = useState(true);
+
+  const toggleSignInSignUp = () => {
+    setIsSignedIn(!isSignedIn);
+  };
   return (
     <div>
       <Header />
@@ -12,7 +17,16 @@ const Login = () => {
         />
       </div>
       <form className="absolute w-3/12 p-12 my-36 right-0 left-0 bg-black mx-auto text-white bg-opacity-85 rounded-lg">
-        <h1 className="font-bold text-3xl py-4">Sign In</h1>
+        <h1 className="font-bold text-3xl py-4">
+          {isSignedIn ? "Sign In" : "Sign Up"}
+        </h1>
+        {!isSignedIn && (
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="p-3 my-3 w-full bg-gray-800"
+          ></input>
+        )}
         <input
           type="text"
           placeholder="Email Address"
@@ -24,8 +38,13 @@ const Login = () => {
           className="p-3 my-3 w-full  bg-gray-800"
         ></input>
         <button className="py-3 my-3 w-full bg-red-600 rounded-lg">
-          Sign In
+          {isSignedIn ? "Sign In" : "Sign Up"}
         </button>
+        <p onClick={toggleSignInSignUp}>
+          {isSignedIn
+            ? "New to Netflix? Sign Up now!"
+            : "Already a user? Sign In now!"}
+        </p>
       </form>
     </div>
   );
